@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#80d8ff" />
+      <stop offset="100%" stop-color="#bbdefb" />
+    </linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4caf50" />
+      <stop offset="100%" stop-color="#a5d6a7" />
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff176" />
+      <stop offset="100%" stop-color="#fdd835" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="300" rx="24" fill="#e3f2fd" />
+  <rect x="0" y="0" width="600" height="200" fill="url(#sky)" />
+  <circle cx="480" cy="60" r="42" fill="url(#sun)" opacity="0.95" />
+  <path d="M0 200 Q150 160 300 200 T600 200 L600 300 L0 300 Z" fill="url(#field)" />
+  <path d="M0 220 Q150 180 300 220 T600 220 L600 300 L0 300 Z" fill="#388e3c" opacity="0.8" />
+  <path d="M190 190 C210 160 230 160 250 190" stroke="#c5e1a5" stroke-width="16" fill="none" />
+  <path d="M250 186 L250 240" stroke="#8bc34a" stroke-width="14" stroke-linecap="round" />
+  <path d="M320 200 C340 170 360 170 380 200" stroke="#c5e1a5" stroke-width="16" fill="none" />
+  <path d="M380 195 L380 250" stroke="#8bc34a" stroke-width="14" stroke-linecap="round" />
+  <path d="M120 210 C140 180 160 180 180 210" stroke="#c5e1a5" stroke-width="16" fill="none" />
+  <path d="M180 206 L180 266" stroke="#8bc34a" stroke-width="14" stroke-linecap="round" />
+  <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="36" fill="#1b5e20" font-weight="700">OptiCrop</text>
+  <text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#264d00">Smart crop recommendation</text>
+</svg>
