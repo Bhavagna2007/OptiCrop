@@ -13,9 +13,8 @@ except ModuleNotFoundError:
 # Flask App Configuration
 # ----------------------------
 base_dir = Path(__file__).resolve().parent
-notebook_dir = base_dir / "dataset" / "notebook"
-template_dir = notebook_dir / "templates"
-static_dir = notebook_dir / "static"
+template_dir = base_dir / "templates"
+static_dir = base_dir / "static"
 
 app = Flask(
     __name__,
@@ -26,7 +25,10 @@ app = Flask(
 # ----------------------------
 # Load Trained Model
 # ----------------------------
-model_candidates = [base_dir / "crop_model.pkl", notebook_dir / "crop_model.pkl"]
+model_candidates = [
+    base_dir / "crop_model.pkl",
+    base_dir / "dataset" / "notebook" / "crop_model.pkl",
+]
 model_path = next((path for path in model_candidates if path.exists()), None)
 
 if model_path is None:

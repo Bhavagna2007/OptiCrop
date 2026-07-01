@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptiCrop - Crop Recommendation System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-image: url("https://images.unsplash.com/photo-1500937386664-56d1dfef3854");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin-top: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .another-btn {
+            background: #1565c0;
+        }
+
+        .another-btn:hover {
+            background: #0d47a1;
+        }
+
+        .result {
+            margin-top: 25px;
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 6px solid #2e7d32;
+        }
+
+        .crop-name {
+            text-align: center;
+            color: #1b5e20;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .description {
+            line-height: 1.7;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        table tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+
+        table td:first-child {
+            font-weight: bold;
+            color: #2e7d32;
+            width: 45%;
+        }
+
+        @media (max-width:600px) {
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            input,
+            button {
+                font-size: 15px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🌾 OptiCrop</h1>
+
+        <p class="subtitle">
+            <b>Smart Agricultural Production Optimization Engine</b>
+        </p>
+
+        <p class="subtitle">
+            <b>Machine Learning Accuracy:</b> 99.31%
+        </p>
+
+        <form method="POST" id="predictionForm">
+
+            <input type="number" name="N" value="{{ N }}" min="0" max="140" placeholder="Nitrogen (N)" required>
+
+            <input type="number" name="P" value="{{ P }}" min="0" max="145" placeholder="Phosphorus (P)" required>
+
+            <input type="number" name="K" value="{{ K }}" min="0" max="205" placeholder="Potassium (K)" required>
+
+            <input type="number" step="any" name="temperature" value="{{ temperature }}" min="-10" max="60"
+                placeholder="Temperature (°C)" required>
+
+            <input type="number" step="any" name="humidity" value="{{ humidity }}" min="0" max="100"
+                placeholder="Humidity (%)" required>
+
+            <input type="number" step="any" name="ph" value="{{ ph }}" min="0" max="14" placeholder="Soil pH" required>
+
+            <input type="number" step="any" name="rainfall" value="{{ rainfall }}" min="0" max="500"
+                placeholder="Rainfall (mm)" required>
+
+            <button type="submit">
+                🌱 Predict Crop
+            </button>
+
+        </form>
+
+        {% if prediction %}
+
+        <div class="result">
+
+            <h2 style="text-align:center;">
+                🌾 Recommended Crop for Your Farm
+            </h2>
+
+            <div class="crop-name">
+                🌱 {{ prediction }}
+            </div>
+
+            <div class="description">
+
+                <strong>🌿 Crop Information</strong>
+
+                <br><br>
+
+                {{ description }}
+
+            </div>
+
+            <hr style="margin:25px 0;">
+
+            <h3 style="text-align:center;color:#2e7d32;">
+                📋 Input Summary
+            </h3>
+
+            <table>
+
+                <tr>
+                    <td>Nitrogen</td>
+                    <td>{{ N }}</td>
+                </tr>
+
+                <tr>
+                    <td>Phosphorus</td>
+                    <td>{{ P }}</td>
+                </tr>
+
+                <tr>
+                    <td>Potassium</td>
+                    <td>{{ K }}</td>
+                </tr>
+
+                <tr>
+                    <td>Temperature</td>
+                    <td>{{ temperature }} °C</td>
+                </tr>
+
+                <tr>
+                    <td>Humidity</td>
+                    <td>{{ humidity }} %</td>
+                </tr>
+
+                <tr>
+                    <td>Soil pH</td>
+                    <td>{{ ph }}</td>
+                </tr>
+
+                <tr>
+                    <td>Rainfall</td>
+                    <td>{{ rainfall }} mm</td>
+                </tr>
+
+            </table>
+
+            <a href="#predictionForm">
+                <button type="button" class="another-btn">
+                    🔄 Predict Another Crop
+                </button>
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
